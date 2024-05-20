@@ -1,9 +1,12 @@
-const express = require('express');
+const express = require('express');  // importing express and binding it to a variable
 
 const morgan = require('morgan');
 
 
 const campsiteRouter = require('./routes/campsiteRouter');
+const promotionRouter = require('./routes/promotionRouter');
+const partnerRouter = require('./routes/partnerRouter');
+
 
 
 const hostname = 'localhost';
@@ -11,12 +14,15 @@ const hostname = 'localhost';
 
 const port = 3000;
 
-const app = express();
+const app = express();  // express() returns an object with a bunch of methods that we can use e.g. app.use(), app.listen()
 
-app.use(morgan('dev'));
+app.use(morgan('dev'));     // morgan is a middleware tool....helps in outputting/logging messages....middleware 'enhances' the responses/requests as they move between the client and the server
 app.use(express.json());
 
 app.use('/campsites', campsiteRouter);
+app.use('/promotions', promotionRouter);
+app.use('/partners', partnerRouter);
+
 
 
 app.use(express.static(__dirname + '/public'));
